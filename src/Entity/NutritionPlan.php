@@ -1,5 +1,8 @@
 <?php
+<<<<<<< HEAD
+=======
 // src/Entity/NutritionPlan.php
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
 
 namespace App\Entity;
 
@@ -46,12 +49,19 @@ class NutritionPlan
     #[ORM\JoinColumn(nullable: false)]
     private ?User $coach = null;
 
+<<<<<<< HEAD
+    // FIX: This is now the inverse side (mappedBy points to Meal's property)
+    #[ORM\ManyToMany(targetEntity: Meal::class, mappedBy: 'nutritionPlans')]
+=======
     #[ORM\ManyToMany(targetEntity: Meal::class, inversedBy: 'nutritionPlans', cascade: ['persist'])]
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
     private Collection $meals;
 
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'assignedNutritionPlan')]
     private Collection $athletes;
 
+<<<<<<< HEAD
+=======
     // Daily targets
     #[ORM\Column(nullable: true)]
     private ?int $targetCalories = null;
@@ -65,6 +75,7 @@ class NutritionPlan
     #[ORM\Column(nullable: true)]
     private ?int $targetFat = null;
 
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -166,6 +177,10 @@ class NutritionPlan
     {
         if (!$this->meals->contains($meal)) {
             $this->meals->add($meal);
+<<<<<<< HEAD
+            // Ensure bidirectional consistency
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
             if (!$meal->getNutritionPlans()->contains($this)) {
                 $meal->addNutritionPlan($this);
             }
@@ -176,6 +191,10 @@ class NutritionPlan
     public function removeMeal(Meal $meal): static
     {
         if ($this->meals->removeElement($meal)) {
+<<<<<<< HEAD
+            // Ensure bidirectional consistency
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
             if ($meal->getNutritionPlans()->contains($this)) {
                 $meal->removeNutritionPlan($this);
             }
@@ -210,6 +229,21 @@ class NutritionPlan
         return $this;
     }
 
+<<<<<<< HEAD
+    // Helper method to get today's meals
+    public function getTodaysMeals(): Collection
+    {
+        $today = date('N');
+        $todaysMeals = new ArrayCollection();
+        
+        foreach ($this->meals as $meal) {
+            if ($meal->getDayOfWeek() == $today) {
+                $todaysMeals->add($meal);
+            }
+        }
+        
+        return $todaysMeals;
+=======
     public function getTargetCalories(): ?int
     {
         return $this->targetCalories;
@@ -322,5 +356,6 @@ class NutritionPlan
             'fat' => $fat,
             'water' => $this->dailyWaterIntake ?? 2.5
         ];
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
     }
 }

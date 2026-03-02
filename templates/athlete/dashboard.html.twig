@@ -1,3 +1,68 @@
+<<<<<<< HEAD
+{% extends 'base.html.twig' %}
+
+{% block title %}Athlete Dashboard - Sports Management{% endblock %}
+
+{% block body %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4" style="color: var(--primary-green);">Athlete Dashboard</h1>
+            
+            <!-- Welcome Card -->
+            <div class="card card-custom mb-4">
+                <div class="card-body text-center">
+                    <h3>Welcome, {{ user.name }}! 🏆</h3>
+                    <p class="lead">Track your nutrition and fitness journey</p>
+                </div>
+            </div>
+            
+            <!-- Assigned Nutrition Plan -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card card-custom">
+                        <div class="card-header" style="background-color: var(--primary-green); color: white;">
+                            <h5 class="mb-0">My Assigned Nutrition Plan</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if assignedPlan %}
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h4>{{ assignedPlan.name }}</h4>
+                                        <p>{{ assignedPlan.description }}</p>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <strong>Duration:</strong>
+                                                <p>{{ assignedPlan.duration }} days</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <strong>Water Goal:</strong>
+                                                <p>{{ assignedPlan.dailyWaterIntake ? assignedPlan.dailyWaterIntake ~ 'L/day' : 'Not set' }}</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <strong>Coach:</strong>
+                                                <p>{{ assignedPlan.coach.name }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-body text-center">
+                                                <h5>Today's Meals</h5>
+                                                <h2>{{ todaysMeals|length }}</h2>
+                                                <a href="{{ path('app_athlete_nutrition_plan_view', {'id': assignedPlan.id}) }}" class="btn btn-primary-custom btn-sm">View Full Plan</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="text-center py-4">
+                                    <i class="fas fa-utensils fa-3x mb-3" style="color: var(--primary-blue);"></i>
+                                    <h5>No Nutrition Plan Assigned</h5>
+                                    <p class="text-muted">Your coach hasn't assigned you a nutrition plan yet.</p>
+                                </div>
+                            {% endif %}
+=======
 {# templates/athlete/dashboard.html.twig #}
 {% extends 'base.html.twig' %}
 
@@ -177,10 +242,45 @@
                             </div>
                             <h3 class="mb-2">{{ goalProgress|default(0) }}%</h3>
                             <p class="text-muted small mb-0">Towards your goal</p>
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
                         </div>
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+            
+            <!-- Today's Meals -->
+            {% if assignedPlan and todaysMeals|length > 0 %}
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card card-custom">
+                        <div class="card-header" style="background-color: var(--primary-green); color: white;">
+                            <h5 class="mb-0">Today's Meals</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                {% for meal in todaysMeals %}
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100">
+                                        {% if meal.image %}
+                                        <img src="{{ asset('uploads/meals/' ~ meal.image) }}" class="card-img-top" alt="{{ meal.name }}" style="height: 150px; object-fit: cover;">
+                                        {% else %}
+                                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 150px;">
+                                            <span style="color: var(--primary-green);">No Image</span>
+                                        </div>
+                                        {% endif %}
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ meal.name }}</h5>
+                                            <p class="card-text">{{ meal.description|slice(0, 80) }}...</p>
+                                            <div class="mb-2">
+                                                <span class="badge bg-primary">{{ meal.calories }} cal</span>
+                                                <span class="badge bg-info ms-1">{{ meal.mealTime|capitalize }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+=======
 
             <!-- Main Content Row -->
             <div class="row">
@@ -430,11 +530,73 @@
                                 <a href="{{ path('app_athlete_progress') }}" class="btn btn-success w-100 rounded-pill" style="background: var(--primary-green); border: none;">
                                     View Detailed Progress <i class="fas fa-chart-line ms-2"></i>
                                 </a>
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+            {% endif %}
+            
+            <!-- Quick Actions -->
+            <div class="row">
+    <div class="col-md-3 mb-3">
+        <div class="card card-custom text-center h-100">
+            <div class="card-body">
+                <div class="mb-3">
+                    <i class="fas fa-dumbbell fa-3x" style="color: var(--primary-green);"></i>
+                </div>
+                <h5 class="card-title">Exercises</h5>
+                <p>Browse exercises by body part</p>
+                <a href="{{ path('app_athlete_exercises') }}" class="btn btn-primary-custom">View Exercises</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-3">
+        <div class="card card-custom text-center h-100">
+            <div class="card-body">
+                <div class="mb-3">
+                    <i class="fas fa-utensils fa-3x" style="color: var(--primary-green);"></i>
+                </div>
+                <h5 class="card-title">Nutrition Plans</h5>
+                <p>View available nutrition plans</p>
+                <a href="{{ path('app_athlete_nutrition_plans') }}" class="btn btn-primary-custom">Browse Plans</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-3">
+        <div class="card card-custom text-center h-100">
+            <div class="card-body">
+                <div class="mb-3">
+                    <i class="fas fa-apple-alt fa-3x" style="color: var(--primary-green);"></i>
+                </div>
+                <h5 class="card-title">Meals</h5>
+                <p>Explore meal options</p>
+                <a href="{{ path('app_athlete_meals') }}" class="btn btn-primary-custom">View Meals</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-3">
+        <div class="card card-custom text-center h-100">
+            <div class="card-body">
+                <div class="mb-3">
+                    <i class="fas fa-trophy fa-3x" style="color: var(--primary-green);"></i>
+                </div>
+                <h5 class="card-title">Competitions</h5>
+                <p>Join competitions</p>
+                <a href="{{ path('app_athlete_competitions') }}" class="btn btn-primary-custom">View Competitions</a>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+=======
         {% else %}
             <!-- No Plan Assigned -->
             <div class="row justify-content-center">
@@ -998,4 +1160,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
 {% endblock %}

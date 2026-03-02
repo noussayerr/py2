@@ -2,6 +2,12 @@
 
 namespace App\Controller;
 
+<<<<<<< HEAD
+use App\Repository\UserRepository;
+use App\Repository\NutritionPlanRepository;
+use App\Repository\MealRepository;
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,13 +15,38 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractController
 {
     #[Route('/dashboard', name: 'app_dashboard')]
+<<<<<<< HEAD
+    public function index(
+        UserRepository $userRepository,
+        NutritionPlanRepository $nutritionPlanRepository,
+        MealRepository $mealRepository
+    ): Response
+=======
     public function index(): Response
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
     {
         // Get the current user
         $user = $this->getUser();
 
+<<<<<<< HEAD
+        // Count athletes (users with ROLE_ATHLETE)
+        $athletesCount = $userRepository->count(['roleType' => 'athlete']);
+
+        // Count nutrition plans of current coach
+        $nutritionPlansCount = $nutritionPlanRepository->count(['coach' => $user]);
+
+        // Count meals of current coach
+        $mealsCount = $mealRepository->count(['coach' => $user]);
+
         return $this->render('dashboard/index.html.twig', [
             'user' => $user,
+            'athletesCount' => $athletesCount,
+            'nutritionPlansCount' => $nutritionPlansCount,
+            'mealsCount' => $mealsCount,
+=======
+        return $this->render('dashboard/index.html.twig', [
+            'user' => $user,
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         ]);
     }
 }

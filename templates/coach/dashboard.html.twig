@@ -4,7 +4,11 @@
 
 {% block body %}
 <div class="admin-wrapper d-flex" style="min-height: 100vh; width: 100%; margin: 0; padding: 0;">
+<<<<<<< HEAD
+    <!-- Sidebar (same as before) -->
+=======
     <!-- Sidebar -->
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
     <aside class="admin-sidebar" id="sidebar" style="width: 280px; background: linear-gradient(180deg, #1a2e35 0%, #0f1e24 100%); min-height: 100vh; transition: width 0.3s ease; position: fixed; left: 0; top: 0; bottom: 0; z-index: 1000; overflow-y: auto; overflow-x: hidden;">
         <div class="sidebar-header p-4 d-flex justify-content-between align-items-center" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
             <h3 class="text-white mb-0" style="font-weight: 600; white-space: nowrap;">
@@ -58,7 +62,11 @@
                 
                 <!-- Meals with dropdown -->
                 <div class="nav-item">
+<<<<<<< HEAD
+                    <a href="#" class="nav-link active d-flex align-items-center px-3 py-3 mb-2 rounded-3" style="background: var(--primary-green); color: white;" onclick="toggleSubmenu(event, 'mealsSubmenu')">
+=======
                     <a href="#" class="nav-link d-flex align-items-center px-3 py-3 mb-2 rounded-3" style="background: var(--primary-green); color: white;" onclick="toggleSubmenu(event, 'mealsSubmenu')">
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
                         <i class="fas fa-bacon me-3" style="width: 20px; flex-shrink: 0;"></i>
                         <span class="sidebar-text flex-grow-1">Meals</span>
                         <i class="fas fa-chevron-down sidebar-text" id="mealsMenuArrow" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
@@ -92,6 +100,12 @@
         </div>
     </aside>
 
+<<<<<<< HEAD
+
+    <!-- Main Content -->
+    <main class="admin-main" id="mainContent" style="margin-left: 280px; width: calc(100% - 280px); background: #f8f9fa; min-height: 100vh; transition: margin-left 0.3s ease, width 0.3s ease;">
+        
+=======
     <!-- Main Content -->
     <main class="admin-main" id="mainContent" style="margin-left: 280px; width: calc(100% - 280px); background: #f8f9fa; min-height: 100vh; transition: margin-left 0.3s ease, width 0.3s ease;">
         <!-- Top bar with message and notification icons -->
@@ -199,6 +213,7 @@
             </div>
         </div>
 
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         <!-- Content Area -->
         <div class="content-area p-4">
             
@@ -429,7 +444,11 @@
                 </div>
             </div>
             
+<<<<<<< HEAD
+            <!-- Recent Meals - Now as Table -->
+=======
             <!-- Recent Meals -->
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
             <div class="row" id="meals">
                 <div class="col-12">
                     <div class="card border-0 shadow-sm" style="border-radius: 16px; overflow: hidden;">
@@ -765,6 +784,8 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('sidebarCollapsed', 'false');
         }
     });
+<<<<<<< HEAD
+=======
 
     // Update unread message count
     function updateUnreadCount() {
@@ -781,6 +802,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update counts every 30 seconds
     setInterval(updateUnreadCount, 30000);
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
 });
 
 function toggleSubmenu(event, submenuId) {

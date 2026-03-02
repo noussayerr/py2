@@ -1,5 +1,8 @@
 <?php
+<<<<<<< HEAD
+=======
 // src/Entity/User.php
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
 
 namespace App\Entity;
 
@@ -29,6 +32,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+<<<<<<< HEAD
+    /**
+     * @var string The hashed password
+     */
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
     #[ORM\Column]
     private ?string $password = null;
 
@@ -42,6 +51,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Choice(['athlete', 'coach', 'admin'])]
     private ?string $roleType = null;
 
+<<<<<<< HEAD
+=======
     #[ORM\Column(length: 20, nullable: true)]
     #[Assert\Choice(['male', 'female', 'other', 'not_specified'])]
     private ?string $gender = null;
@@ -52,6 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $onboardingCompleted = false;
 
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
@@ -63,10 +75,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'coach', targetEntity: Meal::class)]
     private Collection $meals;
 
+<<<<<<< HEAD
+    // Competitions organized by this user (if admin)
+    #[ORM\OneToMany(mappedBy: 'organizer', targetEntity: Competition::class)]
+    private Collection $organizedCompetitions;
+
+    // Competition applications by this user (if athlete)
+    #[ORM\OneToMany(mappedBy: 'athlete', targetEntity: CompetitionApplication::class)]
+    private Collection $competitionApplications;
+
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
     // Nutrition plan assigned to this user (if athlete)
     #[ORM\ManyToOne(targetEntity: NutritionPlan::class, inversedBy: 'athletes')]
     private ?NutritionPlan $assignedNutritionPlan = null;
 
+<<<<<<< HEAD
+    // Water intake tracking (for athletes)
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private array $waterIntake = [];
+
+    // Email verification fields
+    #[ORM\Column(type: Types::BOOLEAN, nullable: false, options: ['default' => 0])]
+    private bool $isVerified = false;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $verificationCode = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $verificationCodeExpiresAt = null;
+    // Password Reset fields
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $passwordResetCode = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $passwordResetCodeExpiresAt = null;
+=======
     // Meal consumption tracking
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: MealConsumption::class, cascade: ['persist', 'remove'])]
     private Collection $mealConsumptions;
@@ -88,17 +132,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Conversation::class, mappedBy: 'participants')]
     private Collection $conversations;
 
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->nutritionPlans = new ArrayCollection();
         $this->meals = new ArrayCollection();
+<<<<<<< HEAD
+        $this->organizedCompetitions = new ArrayCollection();
+        $this->competitionApplications = new ArrayCollection();
+        $this->waterIntake = [];
+        $this->isVerified = false;
+=======
         $this->mealConsumptions = new ArrayCollection();
         $this->waterIntakes = new ArrayCollection();
         $this->progressEntries = new ArrayCollection();
         $this->customMealLogs = new ArrayCollection();
         $this->conversations = new ArrayCollection();
         $this->onboardingCompleted = false;
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
     }
 
     public function getId(): ?int
@@ -114,6 +166,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         return $this;
     }
 
@@ -136,16 +192,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
         
+<<<<<<< HEAD
+        // Add the roleType as a ROLE_ prefixed role
+        $roles[] = 'ROLE_' . strtoupper($this->roleType);
+
+=======
         if ($this->roleType) {
             $roles[] = 'ROLE_' . strtoupper($this->roleType);
         }
         
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         return array_unique($roles);
     }
 
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         return $this;
     }
 
@@ -160,6 +226,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         return $this;
     }
 
@@ -180,6 +250,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setName(string $name): static
     {
         $this->name = $name;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         return $this;
     }
 
@@ -191,6 +265,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoleType(string $roleType): static
     {
         $this->roleType = $roleType;
+<<<<<<< HEAD
+
+=======
         return $this;
     }
 
@@ -224,6 +301,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setOnboardingCompleted(bool $onboardingCompleted): static
     {
         $this->onboardingCompleted = $onboardingCompleted;
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         return $this;
     }
 
@@ -235,6 +313,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         return $this;
     }
 
@@ -252,16 +334,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->nutritionPlans->add($nutritionPlan);
             $nutritionPlan->setCoach($this);
         }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         return $this;
     }
 
     public function removeNutritionPlan(NutritionPlan $nutritionPlan): static
     {
         if ($this->nutritionPlans->removeElement($nutritionPlan)) {
+<<<<<<< HEAD
+            // set the owning side to null (unless already changed)
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
             if ($nutritionPlan->getCoach() === $this) {
                 $nutritionPlan->setCoach(null);
             }
         }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         return $this;
     }
 
@@ -279,16 +373,88 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->meals->add($meal);
             $meal->setCoach($this);
         }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         return $this;
     }
 
     public function removeMeal(Meal $meal): static
     {
         if ($this->meals->removeElement($meal)) {
+<<<<<<< HEAD
+            // set the owning side to null (unless already changed)
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
             if ($meal->getCoach() === $this) {
                 $meal->setCoach(null);
             }
         }
+<<<<<<< HEAD
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Competition>
+     */
+    public function getOrganizedCompetitions(): Collection
+    {
+        return $this->organizedCompetitions;
+    }
+
+    public function addOrganizedCompetition(Competition $organizedCompetition): static
+    {
+        if (!$this->organizedCompetitions->contains($organizedCompetition)) {
+            $this->organizedCompetitions->add($organizedCompetition);
+            $organizedCompetition->setOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrganizedCompetition(Competition $organizedCompetition): static
+    {
+        if ($this->organizedCompetitions->removeElement($organizedCompetition)) {
+            // set the owning side to null (unless already changed)
+            if ($organizedCompetition->getOrganizer() === $this) {
+                $organizedCompetition->setOrganizer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CompetitionApplication>
+     */
+    public function getCompetitionApplications(): Collection
+    {
+        return $this->competitionApplications;
+    }
+
+    public function addCompetitionApplication(CompetitionApplication $competitionApplication): static
+    {
+        if (!$this->competitionApplications->contains($competitionApplication)) {
+            $this->competitionApplications->add($competitionApplication);
+            $competitionApplication->setAthlete($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompetitionApplication(CompetitionApplication $competitionApplication): static
+    {
+        if ($this->competitionApplications->removeElement($competitionApplication)) {
+            // set the owning side to null (unless already changed)
+            if ($competitionApplication->getAthlete() === $this) {
+                $competitionApplication->setAthlete(null);
+            }
+        }
+
+=======
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
         return $this;
     }
 
@@ -300,6 +466,128 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAssignedNutritionPlan(?NutritionPlan $assignedNutritionPlan): static
     {
         $this->assignedNutritionPlan = $assignedNutritionPlan;
+<<<<<<< HEAD
+
+        return $this;
+    }
+
+    public function getWaterIntake(): array
+    {
+        return $this->waterIntake;
+    }
+
+    public function setWaterIntake(array $waterIntake): static
+    {
+        $this->waterIntake = $waterIntake;
+
+        return $this;
+    }
+
+    public function addWaterIntake(float $amount, \DateTimeInterface $date = null): static
+    {
+        $dateKey = ($date ?? new \DateTime())->format('Y-m-d');
+        
+        if (!isset($this->waterIntake[$dateKey])) {
+            $this->waterIntake[$dateKey] = 0;
+        }
+        
+        $this->waterIntake[$dateKey] += $amount;
+        
+        return $this;
+    }
+
+    public function getTodaysWaterIntake(): float
+    {
+        $today = (new \DateTime())->format('Y-m-d');
+        return $this->waterIntake[$today] ?? 0;
+    }
+
+    // Helper method to get approved competitions
+    public function getApprovedCompetitions(): array
+    {
+        $approved = [];
+        foreach ($this->competitionApplications as $app) {
+            if ($app->getStatus() === 'approved') {
+                $approved[] = $app->getCompetition();
+            }
+        }
+        return $approved;
+    }
+
+    // Email Verification getters and setters
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
+        return $this;
+    }
+
+    public function getVerificationCode(): ?string
+    {
+        return $this->verificationCode;
+    }
+
+    public function setVerificationCode(?string $verificationCode): static
+    {
+        $this->verificationCode = $verificationCode;
+        return $this;
+    }
+
+    public function getVerificationCodeExpiresAt(): ?\DateTimeInterface
+    {
+        return $this->verificationCodeExpiresAt;
+    }
+
+    public function setVerificationCodeExpiresAt(?\DateTimeInterface $verificationCodeExpiresAt): static
+    {
+        $this->verificationCodeExpiresAt = $verificationCodeExpiresAt;
+        return $this;
+    }
+
+    public function isVerificationCodeExpired(): bool
+    {
+        if (!$this->verificationCodeExpiresAt) {
+            return true;
+        }
+        return new \DateTime() > $this->verificationCodeExpiresAt;
+    }
+
+    // Password Reset getters and setters
+    public function getPasswordResetCode(): ?string
+    {
+        return $this->passwordResetCode;
+    }
+
+    public function setPasswordResetCode(?string $passwordResetCode): static
+    {
+        $this->passwordResetCode = $passwordResetCode;
+        return $this;
+    }
+
+    public function getPasswordResetCodeExpiresAt(): ?\DateTimeInterface
+    {
+        return $this->passwordResetCodeExpiresAt;
+    }
+
+    public function setPasswordResetCodeExpiresAt(?\DateTimeInterface $passwordResetCodeExpiresAt): static
+    {
+        $this->passwordResetCodeExpiresAt = $passwordResetCodeExpiresAt;
+        return $this;
+    }
+
+    public function isPasswordResetCodeExpired(): bool
+    {
+        if (!$this->passwordResetCodeExpiresAt) {
+            return true;
+        }
+        return new \DateTime() > $this->passwordResetCodeExpiresAt;
+    }
+}
+=======
         return $this;
     }
 
@@ -743,3 +1031,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->name;
     }
 }
+>>>>>>> 6857de554cfd071bc09489d64f6ff7fcfbf24b63
